@@ -110,7 +110,7 @@ export default function About() {
               Proudly Welsh
             </h3>
             <p className="text-xl max-w-3xl mx-auto leading-relaxed">
-              We're not just a travel company - we're ambassadors of Welsh culture and heritage. 
+              We&apos;re not just a travel company - we&apos;re ambassadors of Welsh culture and heritage. 
               Our drivers share local stories, recommend authentic Welsh experiences, and ensure 
               your journey through Wales is filled with the warmth and hospitality our country 
               is famous for.
@@ -121,3 +121,4 @@ export default function About() {
     </section>
   );
 }
+
