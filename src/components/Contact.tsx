@@ -88,7 +88,7 @@ export default function Contact() {
                 <div className="text-green-600 text-6xl mb-4">✓</div>
                 <h4 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h4>
                 <p className="text-gray-600">
-                  We've received your request and will get back to you within 24 hours.
+                  We&apos;ve received your request and will get back to you within 24 hours.
                 </p>
               </div>
             ) : (
