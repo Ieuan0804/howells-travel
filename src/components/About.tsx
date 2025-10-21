@@ -50,7 +50,7 @@ export default function About() {
               the back of our hand.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Whether you're planning a corporate event, family gathering, or exploring Wales' 
+              Whether you&apos;re planning a corporate event, family gathering, or exploring Wales&apos; 
               rich heritage, our experienced team is dedicated to making your travel experience 
               memorable and stress-free.
             </p>
