@@ -9,8 +9,8 @@ export default function About() {
   const values = [
     {
       icon: '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
-      title: 'Welsh Heritage',
-      description: 'Proudly Welsh-owned and operated, we understand the local culture and hidden gems of our beautiful country.'
+      title: 'Customer Satisfaction',
+      description: 'We go above and beyond for our customers to assure the very best experience.'
     },
     {
       icon: '🛡️',
@@ -39,20 +39,16 @@ export default function About() {
               About Howells Travel
             </h2>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              Founded in 2009, Howells Travel has been proudly serving Wales with premium minibus 
-              transportation services. As a family-owned business, we understand the importance of 
-              reliable, comfortable, and safe travel for your most important journeys.
+              Founded in 2006, Howells Minibuses was founded by father and son Wayne Howells & Kirk Howells.
+              The business flourished and continued until 2014 when it was unfortunately shut down due to ill health.
+              Now, in 2025 Howells Travel has been formed, by Kirk Howells and his son Ieuan Howells, this is 
+              Howells Minibuses reborn into a new adventure, a true family business.
             </p>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
               Our deep roots in Welsh communities give us unique insights into the best routes, 
               hidden gems, and local attractions that make your journey truly special. From the 
               bustling streets of Cardiff to the serene beauty of Snowdonia, we know Wales like 
               the back of our hand.
-            </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Whether you&apos;re planning a corporate event, family gathering, or exploring Wales&apos; 
-              rich heritage, our experienced team is dedicated to making your travel experience 
-              memorable and stress-free.
             </p>
           </div>
           <div className="relative">

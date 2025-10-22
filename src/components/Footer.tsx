@@ -73,15 +73,15 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <div className="space-y-2 text-gray-300">
               <p>📞 +44 1234 567890</p>
-              <p>✉️ info@howellstravel.co.uk</p>
+              <p>✉️ bookings@howellstravels.co.uk</p>
               <p>📍 Cardiff, Wales</p>
-              <p>🕒 Mon-Fri: 8AM-6PM</p>
+              <p>🕒 Mon-Fri: 24/7</p>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Howells Travel. All rights reserved. | Privacy Policy | Terms of Service</p>
+          <p>&copy; 2025 Howells Travel. All rights reserved. | Privacy Policy | Terms of Service</p>
         </div>
       </div>
     </footer>
