@@ -1,4 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+
+// Ensure this route runs on the Node.js runtime (required for nodemailer)
+export const runtime = 'nodejs';
+// Avoid any caching so updated environment variables are always read at runtime
+export const dynamic = 'force-dynamic';
 import nodemailer from 'nodemailer';
 
 type ContactPayload = {
