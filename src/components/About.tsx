@@ -45,10 +45,12 @@ export default function About() {
               Howells Minibuses reborn into a new adventure, a true family business.
             </p>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              Our deep roots in Welsh communities give us unique insights into the best routes, 
-              hidden gems, and local attractions that make your journey truly special. From the 
-              bustling streets of Cardiff to the serene beauty of Snowdonia, we know Wales like 
-              the back of our hand.
+              Our story is built on hard work, trust, and the pride of serving our neighbours. 
+              From school runs and sports fixtures to airport transfers, weddings, and corporate travel, 
+              we deliver reliable, comfortable transport tailored to your plans. Every journey is carefully 
+              scheduled, every vehicle is maintained to the highest standards, and every customer is treated 
+              with the same care we&apos;d give our own family. That&apos;s the Howells way—local, professional, 
+              and always personal.
             </p>
           </div>
           <div className="relative">
