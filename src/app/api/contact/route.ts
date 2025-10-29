@@ -41,9 +41,10 @@ export async function POST(req: NextRequest) {
     }
     const data = rawData as ContactPayload;
 
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    // TEMPORARY: Hardcoded fallback for testing - REMOVE AFTER VERCEL ENV VARS ARE FIXED
+    const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_HsbNKeVy_7BV2v7Ue5KVL8GsbHJXuvPxR';
     const CONTACT_TO = process.env.CONTACT_TO;
-    const CONTACT_FROM = process.env.CONTACT_FROM;
+    const CONTACT_FROM = process.env.CONTACT_FROM || 'no-reply@bookings.howellstravels.co.uk';
 
     if (!RESEND_API_KEY || !CONTACT_TO) {
       const missing = [
