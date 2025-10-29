@@ -44,8 +44,16 @@ export async function POST(req: NextRequest) {
     const CONTACT_FROM = process.env.CONTACT_FROM;
 
     if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !CONTACT_TO) {
+      const missing = [
+        !SMTP_HOST && 'SMTP_HOST',
+        !SMTP_PORT && 'SMTP_PORT',
+        !SMTP_USER && 'SMTP_USER',
+        !SMTP_PASS && 'SMTP_PASS',
+        !CONTACT_TO && 'CONTACT_TO',
+      ].filter(Boolean).join(', ');
+      
       return NextResponse.json(
-        { error: 'Email service not configured' },
+        { error: `Email service not configured. Missing: ${missing}` },
         { status: 500 }
       );
     }
