@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
-// Ensure this route runs on the Node.js runtime (required for nodemailer)
+// Ensure this route runs on the Node.js runtime
 export const runtime = 'nodejs';
 // Avoid any caching so updated environment variables are always read at runtime
 export const dynamic = 'force-dynamic';
-import nodemailer from 'nodemailer';
 
 type ContactPayload = {
   name: string;
@@ -41,40 +41,22 @@ export async function POST(req: NextRequest) {
     }
     const data = rawData as ContactPayload;
 
-    const SMTP_HOST = process.env.SMTP_HOST;
-    const SMTP_PORT = process.env.SMTP_PORT;
-    const SMTP_USER = process.env.SMTP_USER;
-    const SMTP_PASS = process.env.SMTP_PASS;
+    const RESEND_API_KEY = process.env.RESEND_API_KEY;
     const CONTACT_TO = process.env.CONTACT_TO;
     const CONTACT_FROM = process.env.CONTACT_FROM;
 
-    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !CONTACT_TO) {
+    if (!RESEND_API_KEY || !CONTACT_TO) {
       const missing = [
-        !SMTP_HOST && 'SMTP_HOST',
-        !SMTP_PORT && 'SMTP_PORT',
-        !SMTP_USER && 'SMTP_USER',
-        !SMTP_PASS && 'SMTP_PASS',
+        !RESEND_API_KEY && 'RESEND_API_KEY',
         !CONTACT_TO && 'CONTACT_TO',
       ].filter(Boolean).join(', ');
-      
-      return NextResponse.json(
-        { error: `Email service not configured. Missing: ${missing}` },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: `Email service not configured. Missing: ${missing}` }, { status: 500 });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: Number(SMTP_PORT ?? 587),
-      secure: Number(SMTP_PORT) === 465,
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS,
-      },
-    });
+    const resend = new Resend(RESEND_API_KEY);
 
     const subject = `New quote request from ${data.name}`;
-    const from = CONTACT_FROM || SMTP_USER!;
+    const from = CONTACT_FROM || 'onboarding@resend.dev';
 
     const html = `
       <h2>New Quote Request</h2>
@@ -100,14 +82,18 @@ export async function POST(req: NextRequest) {
       + (data.destination ? `Destination: ${data.destination}\n` : '')
       + (data.message ? `\nDetails:\n${data.message}\n` : '');
 
-    await transporter.sendMail({
+    const { error } = await resend.emails.send({
       from,
       to: CONTACT_TO,
       subject,
-      text,
       html,
+      text,
       replyTo: data.email,
     });
+
+    if (error) {
+      return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
+    }
 
     return NextResponse.json({ ok: true });
   } catch {
