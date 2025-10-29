@@ -13,11 +13,14 @@ type ContactPayload = {
   message?: string;
 };
 
-function validate(payload: any): { ok: boolean; error?: string } {
-  if (!payload || typeof payload !== 'object') return { ok: false, error: 'Invalid payload' };
-  const required = ['name', 'email', 'service'];
+function validate(payload: unknown): { ok: boolean; error?: string } {
+  if (payload === null || typeof payload !== 'object') {
+    return { ok: false, error: 'Invalid payload' };
+  }
+  const data = payload as Record<string, unknown>;
+  const required = ['name', 'email', 'service'] as const;
   for (const field of required) {
-    if (!payload[field] || typeof payload[field] !== 'string') {
+    if (typeof data[field] !== 'string' || (data[field] as string).trim() === '') {
       return { ok: false, error: `Missing required field: ${field}` };
     }
   }
@@ -26,20 +29,19 @@ function validate(payload: any): { ok: boolean; error?: string } {
 
 export async function POST(req: NextRequest) {
   try {
-    const data = (await req.json()) as ContactPayload;
-    const valid = validate(data);
+    const rawData = await req.json();
+    const valid = validate(rawData);
     if (!valid.ok) {
       return NextResponse.json({ error: valid.error }, { status: 400 });
     }
+    const data = rawData as ContactPayload;
 
-    const {
-      SMTP_HOST,
-      SMTP_PORT,
-      SMTP_USER,
-      SMTP_PASS,
-      CONTACT_TO,
-      CONTACT_FROM,
-    } = process.env as Record<string, string | undefined>;
+    const SMTP_HOST = process.env.SMTP_HOST;
+    const SMTP_PORT = process.env.SMTP_PORT;
+    const SMTP_USER = process.env.SMTP_USER;
+    const SMTP_PASS = process.env.SMTP_PASS;
+    const CONTACT_TO = process.env.CONTACT_TO;
+    const CONTACT_FROM = process.env.CONTACT_FROM;
 
     if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !CONTACT_TO) {
       return NextResponse.json(
@@ -95,7 +97,7 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ ok: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
   }
 }

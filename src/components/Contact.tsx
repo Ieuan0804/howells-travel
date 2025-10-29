@@ -59,8 +59,9 @@ export default function Contact() {
           message: ''
         });
       }, 3000);
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong.');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong.';
+      setError(message);
     } finally {
       setIsSubmitting(false);
     }
