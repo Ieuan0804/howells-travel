@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
 
 // Lightweight diagnostics endpoint to verify env vars at runtime (does not leak values)
 export async function GET() {
-  const keys = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'CONTACT_TO', 'CONTACT_FROM'] as const;
+  const keys = ['RESEND_API_KEY', 'CONTACT_TO', 'CONTACT_FROM', 'SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS'] as const;
   const presence: Record<string, boolean> = {};
   for (const key of keys) {
     presence[key] = !!process.env[key];
